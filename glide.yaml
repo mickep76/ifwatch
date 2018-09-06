@@ -1,0 +1,22 @@
+package: github.com/mickep76/ifwatch
+import:
+- package: github.com/pierrec/lz4
+  version: v1.1
+- package: github.com/Shopify/sarama
+  version: v1.17.0
+- package: github.com/coreos/etcd
+  version: v3.3.6
+  subpackages:
+  - clientv3
+- package: github.com/docopt/docopt-go
+- package: gitlab.trading.imc.intra/go/ethtool
+- package: gitlab.trading.imc.intra/go/go-difflib
+  subpackages:
+  - difflib
+- package: gitlab.trading.imc.intra/go/go-sff
+  subpackages:
+  - common
+- package: gitlab.trading.imc.intra/go/netlink
+- package: gitlab.trading.imc.intra/go/termtable
+  subpackages:
+  - winsize
