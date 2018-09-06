@@ -6,7 +6,7 @@ import (
 
 	"github.com/docopt/docopt-go"
 
-	"github.com/imc-trading/ifwatch/cmd"
+	"github.com/mickep76/ifwatch/cmd"
 )
 
 const version = "0.3.2"

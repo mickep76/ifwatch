@@ -9,14 +9,21 @@ import:
   subpackages:
   - clientv3
 - package: github.com/docopt/docopt-go
-- package: gitlab.trading.imc.intra/go/ethtool
-- package: gitlab.trading.imc.intra/go/go-difflib
+- package: github.com/imc-trading/ifwatch
+  subpackages:
+  - backend
+  - backend/etcd
+  - backend/kafka
+  - cmd
+  - netx
+- package: github.com/mickep76/ethtool
+- package: github.com/mickep76/go-difflib
   subpackages:
   - difflib
-- package: gitlab.trading.imc.intra/go/go-sff
+- package: github.com/mickep76/go-sff
   subpackages:
   - common
-- package: gitlab.trading.imc.intra/go/netlink
-- package: gitlab.trading.imc.intra/go/termtable
+- package: github.com/mickep76/netlink
+- package: github.com/mickep76/termtable
   subpackages:
   - winsize
