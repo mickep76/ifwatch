@@ -32,6 +32,6 @@ ARG REL
 RUN rpmbuild -bb \
       --target="x86_64" \
       --define "_topdir /root/rpmbuild" \
-      --define "_version ${VER}" \
-      --define "_release ${REL}" \
+      --define "_ver ${VER}" \
+      --define "_rel ${REL}" \
       /root/rpmbuild/SPECS/ifwatch.spec

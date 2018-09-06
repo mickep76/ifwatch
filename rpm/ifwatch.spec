@@ -1,6 +1,6 @@
-%define name %NAME%
-%define version %VERSION%
-%define release %RELEASE%
+%define name ifwatch
+%define version %{_ver}
+%define release %{_rel}
 %define buildroot %{_topdir}/BUILDROOT
 %define sources %{_topdir}/SOURCES
 
