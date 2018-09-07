@@ -22,8 +22,8 @@ RUN cd $GOPATH/src/$SRC && go build .
 
 # Build RPM
 RUN mkdir -p /root/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
-RUN cp $GOPATH/src/$SRC/ifwatch /root/SOURCES
-COPY rpm/*.spec /root/rpmbuild/SPECS/
+RUN cp $GOPATH/src/$SRC/ifwatch /root/rpmbuild/SOURCES
+COPY rpm/ifwatch.spec /root/rpmbuild/SPECS/
 COPY rpm/* /root/rpmbuild/SOURCES/
 
 ARG VER

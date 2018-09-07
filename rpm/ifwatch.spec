@@ -15,7 +15,7 @@ Group: System
 AutoReqProv: no
 
 %description
-Listen to netlink events for network interfaces and publish it to etcd
+Listen to netlink events for network interfaces and publish it to etcd or Kafka
 
 %prep
 mkdir -p %{buildroot}/usr/bin
@@ -23,9 +23,9 @@ mkdir -p %{buildroot}/etc/systemd/system
 mkdir -p %{buildroot}/etc/init.d
 mkdir -p %{buildroot}/etc/sysconfig
 cp %{sources}/%{name} %{buildroot}/usr/bin
-cp %{sources}/rpm/%{name}.service %{buildroot}/etc/systemd/system/%{name}.service
-cp %{sources}/rpm/%{name}.initd %{buildroot}/etc/init.d/%{name}
-cp %{sources}/rpm/%{name}.sysconfig %{buildroot}/etc/sysconfig/%{name}
+cp %{sources}/%{name}.service %{buildroot}/etc/systemd/system/%{name}.service
+cp %{sources}/%{name}.initd %{buildroot}/etc/init.d/%{name}
+cp %{sources}/%{name}.sysconfig %{buildroot}/etc/sysconfig/%{name}
 
 %post
 which systemctl &>/dev/null && systemctl daemon-reload
