@@ -1,31 +1,47 @@
-%define name ifwatch
-%define version %{_ver}
-%define release %{_rel}
-%define buildroot %{_topdir}/BUILDROOT
 %define sources %{_topdir}/SOURCES
 
-BuildRoot: %{buildroot}
-Source: %SOURCE%
+BuildRoot: %{_topdir}/BUILDROOT
+Source: None
+#%{_topdir}/SOURCES
 Summary: %{name}
-Name: %{name}
-Version: %{version}
-Release: %{release}
+Name: ifwatch
+Version: %{_ver}
+Release: %{_rel}
 License: Apache License, Version 2.0
 Group: System
 AutoReqProv: no
+BuildRequires: go git rpm-build
 
 %description
-Listen to netlink events for network interfaces and publish it to etcd or Kafka
+Listen to netlink events on network interfaces and publish it to etcd or Kafka
 
 %prep
+mkdir -p go/{pkg,bin} go/src/%{_src}
+cp -r %{sources}/* go/src/%{_src}
+
+%build
+GOPATH=$PWD/go
+PATH=$GOPATH/bin:$PATH
+export GOPATH PATH
+
+# Install Glide
+go get github.com/Masterminds/glide/...
+
+# Download packages
+cd $GOPATH/src/%{_src} && ls -la && glide up
+
+# Compile
+cd $GOPATH/src/%{_src} && go build .
+
+%install
 mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}/etc/systemd/system
-mkdir -p %{buildroot}/etc/init.d
-mkdir -p %{buildroot}/etc/sysconfig
-cp %{sources}/%{name} %{buildroot}/usr/bin
-cp %{sources}/%{name}.service %{buildroot}/etc/systemd/system/%{name}.service
-cp %{sources}/%{name}.initd %{buildroot}/etc/init.d/%{name}
-cp %{sources}/%{name}.sysconfig %{buildroot}/etc/sysconfig/%{name}
+mkdir -p %{buildroot}/etc/{init.d,sysconfig}
+
+cp go/src/%{_src}/ifwatch %{buildroot}/usr/bin
+cp %{sources}/rpm/%{name}.service %{buildroot}/etc/systemd/system/%{name}.service
+cp %{sources}/rpm/%{name}.initd %{buildroot}/etc/init.d/%{name}
+cp %{sources}/rpm/%{name}.sysconfig %{buildroot}/etc/sysconfig/%{name}
 
 %post
 which systemctl &>/dev/null && systemctl daemon-reload
